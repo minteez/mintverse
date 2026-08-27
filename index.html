@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mintverse — Projects by Minteez</title>
+    <meta name="description" content="Explore websites, games, experiments and AI-assisted creations built by Minteez since beginning his Generative AI journey in July 2026.">
+    <meta name="theme-color" content="#0d1117">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Mintverse — Projects by Minteez">
+    <meta property="og:description" content="A digital museum and archive of websites, games, and AI-powered creations built since July 2026.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minteez.github.io/mintverse/">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        mint: {
+                            DEFAULT: '#10b981',
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        },
+                        darkbg: '#0a0e17',
+                        cardbg: '#111827',
+                        cardhover: '#1f2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS Styles & Animations -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0e17;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+        }
+
+        .glow-effect {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(10, 14, 23, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.2);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0e17;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-gray-100 antialiased selection:bg-mint-500 selection:text-white">
+
+    <!-- Background Glow & Grid -->
+    <div class="absolute top-0 left-1/4 glow-effect"></div>
+    <div class="absolute top-1/3 right-10 glow-effect"></div>
+    <div class="absolute inset-0 bg-grid pointer-events-none fixed"></div>
+
+    <!-- Navigation Bar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-darkbg/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-mint-400 to-mint-700 flex items-center justify-center text-darkbg font-bold text-xl shadow-lg shadow-mint-500/20 group-hover:scale-105 transition-transform">
+                    M
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg tracking-tight text-white group-hover:text-mint-400 transition-colors">Mintverse</span>
+                    <span class="text-xs text-gray-400 font-mono">by Minteez</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#hero" class="text-gray-300 hover:text-mint-400 transition-colors">Home</a>
+                <a href="#journey" class="text-gray-300 hover:text-mint-400 transition-colors">Journey</a>
+                <a href="#projects" class="text-gray-300 hover:text-mint-400 transition-colors">Projects</a>
+                <a href="#tools" class="text-gray-300 hover:text-mint-400 transition-colors">Tools</a>
+                <a href="#about" class="text-gray-300 hover:text-mint-400 transition-colors">About</a>
+                <a href="#adhil" class="text-gray-300 hover:text-mint-400 transition-colors">Mentor</a>
+            </nav>
+
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="https://github.com/minteez" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-mint-500/10 hover:text-mint-400 flex items-center justify-center text-gray-300 transition-colors border border-white/10" aria-label="GitHub Profile">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#projects" class="px-4 py-2 rounded-xl bg-mint-500 hover:bg-mint-400 text-darkbg font-semibold text-sm transition-all shadow-lg shadow-mint-500/20">
+                    Explore Vault
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2" aria-label="Toggle Navigation Menu">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Modal / Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cardbg/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 space-y-4">
+            <a href="#hero" class="mobile-nav-link block text-base font-medium text-gray-300 hover:text-mint-400">Home</a>
+            <a href="#journey" class="mobile-nav-link block text-base font-medium text-gray-300 hover:text-mint-400">Journey</a>
+            <a href="#projects" class="mobile-nav-link block text-base font-medium text-gray-300 hover:text-mint-400">Projects</a>
+            <a href="#tools" class="mobile-nav-link block text-base font-medium text-gray-300 hover:text-mint-400">Tools</a>
+            <a href="#about" class="mobile-nav-link block text-base font-medium text-gray-300 hover:text-mint-400">About</a>
+            <a href="#adhil" class="mobile-nav-link block text-base font-medium text-gray-300 hover:text-mint-400">Mentor</a>
+            <div class="pt-4 flex items-center space-x-4 border-t border-white/10">
+                <a href="https://github.com/minteez" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-mint-400 text-lg"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://www.instagram.com/sudo.minteez" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-mint-400 text-lg"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://www.youtube.com/@thecubermint" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-mint-400 text-lg"><i class="fab fa-youtube"></i> YouTube</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-20">
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-[90vh] flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs sm:text-sm font-mono">
+                        <span class="w-2 h-2 rounded-full bg-mint-400 animate-pulse"></span>
+                        <span>MY DIGITAL CREATIONS • 2026 →</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight">
+                        Welcome to <span class="text-gradient">Mintverse.</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        A collection of websites, games, experiments and AI-powered creations built since I discovered Generative AI and AI-assisted development in July 2026.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#projects" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-mint-500 hover:bg-mint-400 text-darkbg font-bold text-base transition-all shadow-xl shadow-mint-500/25 flex items-center justify-center space-x-2 group">
+                            <span>Explore Projects</span>
+                            <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#journey" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-semibold text-base transition-all border border-white/10 flex items-center justify-center space-x-2">
+                            <span>My Journey</span>
+                        </a>
+                    </div>
+
+                    <!-- Idea to Code Evolution Flow -->
+                    <div class="pt-6 border-t border-white/10">
+                        <p class="text-xs uppercase tracking-wider text-gray-400 font-mono mb-3">The Evolution Pathway</p>
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2 text-xs font-mono">
+                            <span class="px-3 py-1.5 rounded-lg bg-cardbg border border-white/10 text-gray-300">Idea</span>
+                            <i class="fas fa-chevron-right text-mint-400 text-[10px]"></i>
+                            <span class="px-3 py-1.5 rounded-lg bg-cardbg border border-white/10 text-gray-300">Prompt</span>
+                            <i class="fas fa-chevron-right text-mint-400 text-[10px]"></i>
+                            <span class="px-3 py-1.5 rounded-lg bg-cardbg border border-white/10 text-gray-300">AI</span>
+                            <i class="fas fa-chevron-right text-mint-400 text-[10px]"></i>
+                            <span class="px-3 py-1.5 rounded-lg bg-cardbg border border-white/10 text-gray-300">Code</span>
+                            <i class="fas fa-chevron-right text-mint-400 text-[10px]"></i>
+                            <span class="px-3 py-1.5 rounded-lg bg-mint-500/20 border border-mint-500/40 text-mint-300 font-bold">Creation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Card / Visual Element -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-mint-500 to-emerald-700 opacity-30 blur-xl"></div>
+                        <div class="relative glass-card rounded-3xl p-8 space-y-6 shadow-2xl floating">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <span class="text-xs font-mono text-mint-400 bg-mint-500/10 px-2.5 py-1 rounded-md">mintverse.live</span>
+                            </div>
+
+                            <div class="space-y-4 font-mono text-sm">
+                                <div class="p-3 rounded-xl bg-darkbg/60 border border-white/5 text-gray-300">
+                                    <span class="text-mint-400">$</span> init_journey --year=2026
+                                </div>
+                                <div class="p-3 rounded-xl bg-darkbg/60 border border-white/5 text-gray-300">
+                                    <span class="text-mint-400">></span> Loading 12+ projects & web experiments...
+                                </div>
+                                <div class="p-3 rounded-xl bg-darkbg/60 border border-white/5 text-gray-300 flex items-center justify-between">
+                                    <span>Status: <strong class="text-mint-400">Active Builder</strong></span>
+                                    <i class="fas fa-terminal text-mint-400"></i>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-gray-400">
+                                <span>From Generative AI</span>
+                                <i class="fas fa-arrow-right text-mint-400"></i>
+                                <span>To The Web</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Stats Section -->
+        <section class="py-12 border-y border-white/5 bg-cardbg/30 backdrop-blur-md">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="p-6 rounded-2xl glass-card">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-gradient font-mono">12+</div>
+                        <div class="text-sm text-gray-400 mt-1">Projects Built</div>
+                    </div>
+                    <div class="p-6 rounded-2xl glass-card">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-gradient font-mono">July '26</div>
+                        <div class="text-sm text-gray-400 mt-1">Journey Began</div>
+                    </div>
+                    <div class="p-6 rounded-2xl glass-card">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-gradient font-mono">Multiple</div>
+                        <div class="text-sm text-gray-400 mt-1">AI Platforms</div>
+                    </div>
+                    <div class="p-6 rounded-2xl glass-card">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-gradient font-mono">Web & Games</div>
+                        <div class="text-sm text-gray-400 mt-1">Interactive Apps</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- My Journey Section -->
+        <section id="journey" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-mint-400 text-sm font-mono tracking-wider uppercase">THE INSPIRATION & TIMELINE</span>
+                <h2 class="text-3xl sm:text-5xl font-bold tracking-tight">My Journey into AI & Code</h2>
+                <p class="text-gray-400 text-base sm:text-lg">
+                    How curiosity, mentorship, and Generative AI transformed ideas into real digital applications.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Timeline Card 1 -->
+                <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-6 text-mint-500/20 text-4xl font-mono font-bold group-hover:text-mint-500/30 transition-colors">01</div>
+                    <div class="text-xs font-mono text-mint-400 mb-2">JULY 2026</div>
+                    <h3 class="text-xl font-bold mb-3 text-white">The Beginning</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        This is when I started learning about Generative AI and discovered that AI could help me develop websites and games without prior coding roadblocks.
+                    </p>
+                </div>
+
+                <!-- Timeline Card 2 -->
+                <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-6 text-mint-500/20 text-4xl font-mono font-bold group-hover:text-mint-500/30 transition-colors">02</div>
+                    <div class="text-xs font-mono text-mint-400 mb-2">TOOLS & PLATFORMS</div>
+                    <h3 class="text-xl font-bold mb-3 text-white">AI-Assisted Creation</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        I began experimenting with powerful tools such as Gemini, Claude, Lovable, Canva, Bolt, and other AI-assisted development platforms.
+                    </p>
+                </div>
+
+                <!-- Timeline Card 3 -->
+                <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-6 text-mint-500/20 text-4xl font-mono font-bold group-hover:text-mint-500/30 transition-colors">03</div>
+                    <div class="text-xs font-mono text-mint-400 mb-2">AI SUPERSTAR COURSE</div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Mentorship & Capstones</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Some projects became capstone projects from my AI Superstar course taught by Adhil KP, a prompt engineer whose teaching inspired my confidence.
+                    </p>
+                </div>
+
+                <!-- Timeline Card 4 -->
+                <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-6 text-mint-500/20 text-4xl font-mono font-bold group-hover:text-mint-500/30 transition-colors">04</div>
+                    <div class="text-xs font-mono text-mint-400 mb-2">EXPANSION</div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Independent Building</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Other projects were created independently—for exhibitions, relative ideas, or simply because I wanted to experiment and build for fun.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-12 glass-card rounded-2xl p-8 text-center max-w-4xl mx-auto border border-mint-500/20">
+                <p class="text-gray-300 text-base sm:text-lg italic">
+                    “Mintverse is the result of that journey so far—not a finished destination, but a record of what I have learned by building.”
+                </p>
+            </div>
+        </section>
+
+        <!-- Project Vault Section -->
+        <section id="projects" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <span class="text-mint-400 text-sm font-mono tracking-wider uppercase">DIGITAL MUSEUM & ARCHIVE</span>
+                <h2 class="text-3xl sm:text-5xl font-bold tracking-tight">The Project Vault</h2>
+                <p class="text-gray-400 text-base sm:text-lg">
+                    Every project has a story. Explore what I built, why I built it, and where it lives.
+                </p>
+            </div>
+
+            <!-- Project Filters -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-16" id="filter-container">
+                <button data-filter="all" class="filter-btn active px-5 py-2.5 rounded-xl bg-mint-500 text-darkbg font-semibold text-sm transition-all shadow-md">All Projects</button>
+                <button data-filter="personal" class="filter-btn px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 font-medium text-sm transition-all border border-white/10">Personal</button>
+                <button data-filter="education" class="filter-btn px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 font-medium text-sm transition-all border border-white/10">Education</button>
+                <button data-filter="creative" class="filter-btn px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 font-medium text-sm transition-all border border-white/10">Creative</button>
+                <button data-filter="course" class="filter-btn px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 font-medium text-sm transition-all border border-white/10">Course Projects</button>
+                <button data-filter="games" class="filter-btn px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 font-medium text-sm transition-all border border-white/10">Games</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+
+                <!-- Project 1: Personal Portfolio (Featured / Personal) -->
+                <div class="project-card glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden" data-category="personal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mint-500/5 rounded-full blur-2xl group-hover:bg-mint-500/10 transition-colors"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">Personal</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-gray-300 text-xs font-mono border border-white/10">LOVABLE</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-mint-400 transition-colors">Personal Portfolio</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            A personal portfolio showcasing my profile, skills, achievements, projects, certifications, interests and online presence.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs font-mono text-gray-400">#01</span>
+                        <a href="https://minteez.lovable.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-mint-400 hover:text-mint-300 font-semibold text-sm transition-colors">
+                            <span>Visit Project</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Mint's VM Playground (Featured Creation) -->
+                <div class="project-card glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden border-2 border-mint-500/40" data-category="personal games">
+                    <div class="absolute top-0 right-0 bg-mint-500 text-darkbg text-[10px] font-bold px-3 py-1 rounded-bl-xl font-mono uppercase">Featured Creation</div>
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mint-500/10 rounded-full blur-2xl group-hover:bg-mint-500/20 transition-colors"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">Personal & Games</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-gray-300 text-xs font-mono border border-white/10">LOVABLE</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-mint-400 transition-colors">Mint's VM Playground</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            A playful virtual-machine sandbox where you can create and run fictional operating systems such as MintOS, Aurora Linux, and RetroDOS. It features six fictional operating systems, each with its own personality, boot sequence, and retro-futuristic interface.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs font-mono text-gray-400">#02</span>
+                        <a href="https://vmplayground.lovable.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-mint-400 hover:text-mint-300 font-semibold text-sm transition-colors">
+                            <span>Visit Project</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3: OS Archive -->
+                <div class="project-card glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden" data-category="personal creative">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mint-500/5 rounded-full blur-2xl group-hover:bg-mint-500/10 transition-colors"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">Creative</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-gray-300 text-xs font-mono border border-white/10">GITHUB PAGES</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-mint-400 transition-colors">OS Archive</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            A virtual museum-style archive exploring the evolution of operating systems, their releases, interfaces, and computing history.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs font-mono text-gray-400">#03</span>
+                        <a href="https://minteez.github.io/os-archive/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-mint-400 hover:text-mint-300 font-semibold text-sm transition-colors">
+                            <span>Visit Project</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4: BootArchive -->
+                <div class="project-card glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden" data-category="personal creative">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mint-500/5 rounded-full blur-2xl group-hover:bg-mint-500/10 transition-colors"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">Creative</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-gray-300 text-xs font-mono border border-white/10">GITHUB PAGES</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-mint-400 transition-colors">BootArchive</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            An archive-style project focused on operating-system boot experiences and startup screens across computing history.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs font-mono text-gray-400">#04</span>
+                        <a href="https://minteez.github.io/bootarchive/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-mint-400 hover:text-mint-300 font-semibold text-sm transition-colors">
+                            <span>Visit Project</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5: MathLab -->
+                <div class="project-card glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden" data-category="education">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mint-500/5 rounded-full blur-2xl group-hover:bg-mint-500/10 transition-colors"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">Education</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-gray-300 text-xs font-mono border border-white/10">BOLT</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-mint-400 transition-colors">MathLab</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            An interactive mathematics learning and exploration website created for my Science Exhibition, combining curriculum-based learning with interactive mathematical experiments and explorations.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs font-mono text-gray-400">#05</span>
+                        <a href="https://mathlab.bolt.host/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-mint-400 hover:text-mint-300 font-semibold text-sm transition-colors">
+                            <span>Visit Project</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 6: SpeakUp — A Public Speaking Guide -->
+                <div class="project-card glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden" data-category="education">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mint-500/5 rounded-full blur-2xl group-hover:bg-mint-500/10 transition-colors"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">Education</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-gray-300 text-xs font-mono border border-white/10">LOVABLE</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-mint-400 transition-colors">SpeakUp — A Public Speaking Guide</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            A student-created resource helping young learners develop public speaking confidence with practical tips, speech guidance, competition strategies, and inspiring speaker stories. Inspired by my teacher.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs font-mono text-gray-400">#06</span>
+                        <a href="https://speakup-studio.lovable.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-mint-400 hover:text-mint-300 font-semibold text-sm transition-colors">
+                            <span>Visit Project</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 7: AI Safety Guide -->
+                <div class="project-card glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden" data-category="education">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mint-500/5 rounded-full blur-2xl group-hover:bg-mint-500/10 transition-colors"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">Education</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-gray-300 text-xs font-mono border border-white/10">CANVA</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-mint-400 transition-colors">AI Safety Guide</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            An educational guide focused on helping students understand AI safety, responsible AI use, digital awareness, and cybersecurity fundamentals.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs font-mono text-gray-400">#07</span>
+                        <a href="https://minteez.my.canva.site/ai-safety-guide" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-mint-400 hover:text-mint-300 font-semibold text-sm transition-colors">
+                            <span>Visit Project</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 8: The Complete History of Mysore -->
+                <div class="project-card glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden" data-category="creative">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mint-500/5 rounded-full blur-2xl group-hover:bg-mint-500/10 transition-colors"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">Creative</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-gray-300 text-xs font-mono border border-white/10">LOVABLE</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-mint-400 transition-colors">The Complete History of Mysore</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            A comprehensive educational website exploring the history, culture, heritage, dynasties, rulers, architecture, traditions, and notable personalities of Mysore. Idea inspired by a relative.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs font-mono text-gray-400">#08</span>
+                        <a href="https://mysore-history-vault.lovable.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-mint-400 hover:text-mint-300 font-semibold text-sm transition-colors">
+                            <span>Visit Project</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 9: Intezaar-e-Dastaan -->
+                <div class="project-card glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden" data-category="creative">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mint-500/5 rounded-full blur-2xl group-hover:bg-mint-500/10 transition-colors"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">Creative</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-gray-300 text-xs font-mono border border-white/10">LOVABLE</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-mint-400 transition-colors">Intezaar-e-Dastaan</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            An elegant Hindi-Urdu poetry website featuring Shayari, Nazm, heartfelt quotes, and reflections on themes such as انتظار, silence, relationships, and hope. Idea inspired by a relative.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs font-mono text-gray-400">#09</span>
+                        <a href="https://intezaar-e-dastaan.lovable.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-mint-400 hover:text-mint-300 font-semibold text-sm transition-colors">
+                            <span>Visit Project</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 10: Pip and the Glowing Acorn -->
+                <div class="project-card glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden" data-category="course creative">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mint-500/5 rounded-full blur-2xl group-hover:bg-mint-500/10 transition-colors"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">Course Project</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-gray-300 text-xs font-mono border border-white/10">CANVA</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-mint-400 transition-colors">Pip and the Glowing Acorn</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            A short children's story created as a capstone project during my AI Superstar course.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs font-mono text-gray-400">#10</span>
+                        <a href="https://minteez.my.canva.site/pip-and-the-glowing-acorn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-mint-400 hover:text-mint-300 font-semibold text-sm transition-colors">
+                            <span>Visit Project</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 11: NEXORA AI -->
+                <div class="project-card glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden" data-category="course">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mint-500/5 rounded-full blur-2xl group-hover:bg-mint-500/10 transition-colors"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">Course Project</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-gray-300 text-xs font-mono border border-white/10">GITHUB PAGES</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-mint-400 transition-colors">NEXORA AI</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            A futuristic AI product landing page created as a capstone project assigned during my AI Superstar course.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs font-mono text-gray-400">#11</span>
+                        <a href="https://minteez.github.io/nexora-ai/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-mint-400 hover:text-mint-300 font-semibold text-sm transition-colors">
+                            <span>Visit Project</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 12: Browser Game Hub -->
+                <div class="project-card glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden" data-category="games course">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mint-500/5 rounded-full blur-2xl group-hover:bg-mint-500/10 transition-colors"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">Games & Course</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-gray-300 text-xs font-mono border border-white/10">GEMINI</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-mint-400 transition-colors">Browser Game Hub</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            A collection of browser-based games built entirely with Gemini. Every game runs directly in the browser without installation or setup. The idea began with projects from my course and evolved into an ongoing hobby.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs font-mono text-gray-400">#12</span>
+                        <a href="https://minteez.github.io/browser-game-hub/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-mint-400 hover:text-mint-300 font-semibold text-sm transition-colors">
+                            <span>Visit Project</span>
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- What I Build With Section -->
+        <section id="tools" class="py-24 border-t border-white/5 bg-cardbg/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="text-mint-400 text-sm font-mono tracking-wider uppercase">THE TECHNOLOGY ECOSYSTEM</span>
+                <h2 class="text-3xl sm:text-5xl font-bold tracking-tight mt-4 mb-4">What I Build With</h2>
+                <p class="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto mb-16">
+                    “Different tools. One goal: turning ideas into working experiences.”
+                </p>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 max-w-4xl mx-auto">
+                    <div class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 group hover:border-mint-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-mint-500/10 flex items-center justify-center text-mint-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <span class="font-semibold text-sm text-white">Gemini</span>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 group hover:border-mint-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-mint-500/10 flex items-center justify-center text-mint-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fas fa-wand-magic-sparkles"></i>
+                        </div>
+                        <span class="font-semibold text-sm text-white">Claude</span>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 group hover:border-mint-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-mint-500/10 flex items-center justify-center text-mint-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <span class="font-semibold text-sm text-white">Lovable</span>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 group hover:border-mint-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-mint-500/10 flex items-center justify-center text-mint-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <span class="font-semibold text-sm text-white">Canva</span>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 group hover:border-mint-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-mint-500/10 flex items-center justify-center text-mint-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <span class="font-semibold text-sm text-white">Bolt</span>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 group hover:border-mint-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-mint-500/10 flex items-center justify-center text-mint-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <span class="font-semibold text-sm text-white">HTML5</span>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 group hover:border-mint-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-mint-500/10 flex items-center justify-center text-mint-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <span class="font-semibold text-sm text-white">CSS3</span>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 group hover:border-mint-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-mint-500/10 flex items-center justify-center text-mint-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <span class="font-semibold text-sm text-white">JavaScript</span>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 group hover:border-mint-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-mint-500/10 flex items-center justify-center text-mint-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <span class="font-semibold text-sm text-white">TypeScript</span>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 group hover:border-mint-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-mint-500/10 flex items-center justify-center text-mint-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <span class="font-semibold text-sm text-white">GitHub Pages</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mentor Section / Adhil KP Feature -->
+        <section id="adhil" class="py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 relative overflow-hidden border border-mint-500/30">
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-mint-500/10 rounded-full blur-3xl"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    <div class="md:col-span-8 space-y-6">
+                        <span class="px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-400 text-xs font-mono">MENTOR & INSPIRATION</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">The Inspiration Behind the Journey</h2>
+                        <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
+                            My journey into Generative AI, prompt engineering, vibe coding and AI-assisted website development was strongly inspired by my teacher, <strong>Adhil KP</strong>, a prompt engineer who taught my AI Superstar course. His guidance helped me understand how ideas, prompts and AI tools could become real digital projects—and encouraged me to keep building beyond the course itself.
+                        </p>
+                        <div>
+                            <a href="https://www.adhilkp.in" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-6 py-3 rounded-xl bg-mint-500 hover:bg-mint-400 text-darkbg font-bold text-sm transition-all shadow-lg shadow-mint-500/20">
+                                <span>Learn more about Adhil KP</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="md:col-span-4 flex justify-center">
+                        <div class="w-36 h-36 rounded-3xl bg-gradient-to-br from-mint-400 to-emerald-800 flex items-center justify-center shadow-xl shadow-mint-500/20 p-1">
+                            <div class="w-full h-full bg-darkbg rounded-[22px] flex flex-col items-center justify-center p-4 text-center">
+                                <i class="fas fa-graduation-cap text-mint-400 text-4xl mb-2"></i>
+                                <span class="font-bold text-white text-sm">AI Superstar</span>
+                                <span class="text-xs text-gray-400 font-mono">Course Mentor</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Creator Section -->
+        <section id="about" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/5">
+            <div class="text-center max-w-3xl mx-auto space-y-6">
+                <span class="text-mint-400 text-sm font-mono tracking-wider uppercase">THE PERSON BEHIND THE PROJECTS</span>
+                <h2 class="text-3xl sm:text-5xl font-bold tracking-tight">Mint / Minteez</h2>
+                <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
+                    These projects represent experimentation, learning, AI-assisted development, creativity, and continuous improvement. Mintverse is an expanding collection of digital creations built since July 2026.
+                </p>
+
+                <div class="flex items-center justify-center space-x-4 pt-4">
+                    <a href="https://www.instagram.com/sudo.minteez" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl bg-white/5 hover:bg-mint-500/10 hover:text-mint-400 text-gray-300 transition-all border border-white/10 flex items-center space-x-2">
+                        <i class="fab fa-instagram text-lg"></i>
+                        <span class="text-sm font-semibold">Instagram</span>
+                    </a>
+                    <a href="https://www.youtube.com/@thecubermint" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl bg-white/5 hover:bg-mint-500/10 hover:text-mint-400 text-gray-300 transition-all border border-white/10 flex items-center space-x-2">
+                        <i class="fab fa-youtube text-lg"></i>
+                        <span class="text-sm font-semibold">YouTube</span>
+                    </a>
+                    <a href="https://github.com/minteez" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl bg-white/5 hover:bg-mint-500/10 hover:text-mint-400 text-gray-300 transition-all border border-white/10 flex items-center space-x-2">
+                        <i class="fab fa-github text-lg"></i>
+                        <span class="text-sm font-semibold">GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-cardbg border-t border-white/10 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+                <div class="md:col-span-6 space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-mint-500 flex items-center justify-center text-darkbg font-bold">M</div>
+                        <span class="font-bold text-lg text-white">Mintverse</span>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-sm">
+                        A collection of projects built by Minteez since July 2026. Built with curiosity, Generative AI, and a lot of experimentation.
+                    </p>
+                </div>
+
+                <div class="md:col-span-3 space-y-3">
+                    <h4 class="font-semibold text-white text-sm uppercase tracking-wider font-mono">Navigation</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#hero" class="hover:text-mint-400 transition-colors">Home</a></li>
+                        <li><a href="#journey" class="hover:text-mint-400 transition-colors">Journey</a></li>
+                        <li><a href="#projects" class="hover:text-mint-400 transition-colors">Projects Vault</a></li>
+                        <li><a href="#tools" class="hover:text-mint-400 transition-colors">Tools</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-3 space-y-3">
+                    <h4 class="font-semibold text-white text-sm uppercase tracking-wider font-mono">Connect & Mentor</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="https://github.com/minteez" target="_blank" rel="noopener noreferrer" class="hover:text-mint-400 transition-colors">GitHub (@minteez)</a></li>
+                        <li><a href="https://www.instagram.com/sudo.minteez" target="_blank" rel="noopener noreferrer" class="hover:text-mint-400 transition-colors">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/@thecubermint" target="_blank" rel="noopener noreferrer" class="hover:text-mint-400 transition-colors">YouTube</a></li>
+                        <li><a href="https://www.adhilkp.in" target="_blank" rel="noopener noreferrer" class="hover:text-mint-400 transition-colors text-mint-400">Visit Adhil KP →</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+                <p>© 2026 Minteez. All rights reserved.</p>
+                <p class="mt-2 sm:mt-0 font-mono">Published via GitHub Pages at minteez.github.io/mintverse/</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-2xl bg-mint-500 hover:bg-mint-400 text-darkbg shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300" aria-label="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript for Mobile Menu, Filtering, and Scroll Effects -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Project Filtering System
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button styles
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-mint-500', 'text-darkbg', 'font-semibold');
+                        b.classList.add('bg-white/5', 'text-gray-300', 'font-medium');
+                    });
+                    btn.classList.remove('bg-white/5', 'text-gray-300', 'font-medium');
+                    btn.classList.add('bg-mint-500', 'text-darkbg', 'font-semibold');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    projectCards.forEach(card => {
+                        const categories = card.getAttribute('data-category');
+                        if (filterValue === 'all' || categories.includes(filterValue)) {
+                            card.style.display = 'flex';
+                            setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.95)';
+                            setTimeout(() => { card.style.display = 'none'; }, 300);
+                        }
+                    });
+                });
+            });
+
+            // Back to Top & Navbar shadow on scroll
+            const backToTopBtn = document.getElementById('back-to-top');
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    backToTopBtn.style.opacity = '1';
+                    backToTopBtn.style.pointerEvents = 'auto';
+                } else {
+                    backToTopBtn.style.opacity = '0';
+                    backToTopBtn.style.pointerEvents = 'none';
+                }
+
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-lg', 'bg-darkbg/95');
+                } else {
+                    navbar.classList.remove('shadow-lg', 'bg-darkbg/95');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
