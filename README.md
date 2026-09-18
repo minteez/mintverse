@@ -6,6 +6,8 @@ Journey
 <img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/c96a938c-c494-45d5-9074-e2487c1c91d7" />
 The Project Vault
 <img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/c4baeabd-b0df-45da-b61c-8eab460a6c09" />
+About and Mentor
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/d9fd7bb1-39b5-4e98-bea4-14e0ac63c291" />
 
 **Mintverse** is a personal digital showcase documenting my journey into Generative AI, vibe coding, AI-assisted web development, and creative experimentation.
 
