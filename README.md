@@ -1,4 +1,11 @@
 # Mintverse — Projects by Minteez
+## Gallery
+Home Page
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/be4e7587-f8a5-443a-9b8a-390b1b241327" />
+Journey
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/c96a938c-c494-45d5-9074-e2487c1c91d7" />
+The Project Vault
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/c4baeabd-b0df-45da-b61c-8eab460a6c09" />
 
 **Mintverse** is a personal digital showcase documenting my journey into Generative AI, vibe coding, AI-assisted web development, and creative experimentation.
 
